@@ -72,6 +72,9 @@ def call(Map configMap) {
                 }
             }
             stage("NpmBuild") {
+                when {
+                    expression {stageMap["NpmBuild"] }
+                }                
                 steps {
                     script {
                         if (stageMap["NpmBuild"]) {
