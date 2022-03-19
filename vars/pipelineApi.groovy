@@ -62,12 +62,13 @@ def call(Map configMap) {
                 }
             }
             stage("MavenBuild") {
+                when {
+                    expression {stageMap["MavenBuild"] }
+                }                
                 steps {
                     script {
-                        if (stageMap["MavenBuild"]) {
-                            echo "Maven Build..."
-                            sh "mvn clean install -DskipTests=true"
-                        }
+                        echo "Maven Build..."
+                        sh "mvn clean install -DskipTests=true"
                     }
                 }
             }
