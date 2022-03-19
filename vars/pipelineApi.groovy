@@ -1,5 +1,3 @@
-#!groovy
-
 def execute(Map configMap) {
     echo "configMap: ${configMap}"
     application = configMap["application"]
@@ -36,6 +34,7 @@ def execute(Map configMap) {
     echo "Executing pipeline with the following stages, ${stageMap}"
 
     pipeline {
+        agent any
         environment {
             // This can be nexus3 or nexus2
             NEXUS_VERSION = "nexus3"
