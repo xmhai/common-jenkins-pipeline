@@ -160,7 +160,7 @@ def call(Map configMap) {
                         def dockerFileExists = fileExists "Dockerfile"
                         if (pomExists && dockerFileExists) {
                             pom = readMavenPom file: "pom.xml";
-                            echo "${pom.artifactId}, group: ${parentpom.groupId}, packaging: ${pom.packaging}, version ${pom.version}"
+                            echo "${pom.artifactId}, group: ${pom.groupId}, packaging: ${pom.packaging}, version ${pom.version}"
 
                             if ("${pom.packaging}" == "jar") {
                                 // Find built artifact under target folder
