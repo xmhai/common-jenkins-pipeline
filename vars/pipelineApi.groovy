@@ -2,7 +2,7 @@
 
 def execute(Map configMap) {
     echo "configMap: ${configMap}"
-    application = configMap.get("application":"")
+    application = configMap["application"]
     switch(application) {
         case 'lib':
             def stageMap = [
