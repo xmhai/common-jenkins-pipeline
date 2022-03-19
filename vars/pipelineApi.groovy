@@ -156,6 +156,32 @@ def call(Map configMap) {
                 steps {
                     script {
                         echo "Push to Harbor..."
+                        def pomExists = fileExists "pom.xml"
+                        def dockerFileExists = fileExists "Dockerfile"
+                        if (pomExists && dockerFileExists) {
+                            pom = readMavenPom file: "pom.xml";
+                            echo "${pom.artifactId}, group: ${parentpom.groupId}, packaging: ${pom.packaging}, version ${pom.version}"
+
+                            if ("${pom.packaging}" == "jar") {
+                                // Find built artifact under target folder
+                                filesByGlob = findFiles(glob: "target/*.${pom.packaging}");
+                                boolean exists = filesByGlob.length > 0
+
+                                if (exists) {
+                                    // Print some info from the artifact found
+                                    echo "${filesByGlob[0].name} ${filesByGlob[0].path} ${filesByGlob[0].directory} ${filesByGlob[0].length} ${filesByGlob[0].lastModified}"
+
+                                    echo "build docker image..."
+                                    def dockerImage = docker.build("${HARBOR_URL}/${pom.artifactId}", ".");
+                                    echo "push docker image to harbor..."
+                                    docker.withRegistry("http://${HARBOR_URL}", "${HARBOR_CREDENTIAL_ID}") {
+                                        dockerImage.push();
+                                    }
+                                }
+                            }
+                        } else {
+                            echo "pom.xml or Dockerfile doesn't exist"
+                        }
                     }
                 }
             }
