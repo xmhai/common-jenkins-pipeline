@@ -1,6 +1,6 @@
 #!groovy
 
-def build(Map configMap) {
+def execute(Map configMap) {
     application = configMap.get("application":"")
     switch(application) {
         case 'lib':
