@@ -36,8 +36,9 @@ def execute(Map configMap) {
     echo "Executing pipeline with the following stages, ${stageMap}"
 
     pipeline {
+        agent any
         stages {
-            stage("Clone") {
+            stage('Clone') {
                 steps {
                     echo "Clone..."
                 }
