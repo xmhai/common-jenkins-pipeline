@@ -1,6 +1,6 @@
-//#!groovy
+#!groovy
 
-def execute(Map configMap) {
+def call(Map configMap) {
     echo "configMap: ${configMap}"
     application = configMap["application"]
     stageMap = []
