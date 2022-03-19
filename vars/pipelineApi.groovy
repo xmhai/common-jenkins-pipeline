@@ -76,6 +76,7 @@ def build(Map configMap) {
                         echo "push frontend image to harbor..."
                         docker.withRegistry("http://${HARBOR_URL}", "${HARBOR_CREDENTIAL_ID}") {
                             frontendImage.push();
+                        }
                     }
                 }
             }
@@ -135,17 +136,17 @@ def build(Map configMap) {
                     }
                 }
             }
-            stage("Push to Harbor") {
-                script {
-                    if (stageMap["Push to Harbor"]) {
-                        echo "Push to Harbor..."
-                    }
-                }
-            }
             stage("Deploy to Kubernetes") {
                 script {
                     if (stageMap["Deploy to Kubernetes"]) {
                         echo "Deploy to Kubernetes..."
+                    }
+                }
+            }
+            stage("Push to Harbor") {
+                script {
+                    if (stageMap["Push to Harbor"]) {
+                        echo "Push to Harbor..."
                     }
                 }
             }
