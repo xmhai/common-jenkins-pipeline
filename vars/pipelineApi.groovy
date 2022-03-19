@@ -3,16 +3,17 @@
 def execute(Map configMap) {
     echo "configMap: ${configMap}"
     application = configMap["application"]
+    stageMap = []
     switch(application) {
         case 'lib':
-            def stageMap = [
+            stageMap = [
                 "Clone" : true,
                 "MavenBuild" : true,
                 "Push to Nexus" : true,
             ]
             break
         case 'service':
-            def stageMap = [
+            stageMap = [
                 "Clone" : true,
                 "MavenBuild" : true,
                 "Push to Harbor" : true,
@@ -20,7 +21,7 @@ def execute(Map configMap) {
             ]
             break
         case 'frontend':
-            def stageMap = [
+            stageMap = [
                 "Clone" : true,
                 "NpmBuild" : true,
                 "Push to Harbor" : true,
