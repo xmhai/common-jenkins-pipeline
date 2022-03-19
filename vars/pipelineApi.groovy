@@ -119,7 +119,7 @@ def call(Map configMap) {
 
                             if ("${pom.packaging}" == "jar") {
                                 // Find built artifact under target folder
-                                filesByGlob = findFiles(glob: "${f.name}/target/*.${pom.packaging}");
+                                filesByGlob = findFiles(glob: "target/*.${pom.packaging}");
                                 boolean exists = filesByGlob.length > 0
 
                                 if (exists) {
