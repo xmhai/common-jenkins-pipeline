@@ -194,10 +194,9 @@ def call(Map configMap) {
                     expression {stageMap["Deploy to Kubernetes"] }
                 }                
                 steps {
-                        echo "Deploy to Kubernetes..."
-                        k3s kubectl delete -f k8s-deploy.yaml
-                        k3s kubectl apply -f k8s-deploy.yaml
-                    }
+                    echo "Deploy to Kubernetes..."
+                    k3s kubectl delete -f k8s-deploy.yaml
+                    k3s kubectl apply -f k8s-deploy.yaml
                 }
             }
         }
