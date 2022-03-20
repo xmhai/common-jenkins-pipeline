@@ -76,7 +76,7 @@ def call(Map configMap) {
                 when {
                     allOf {
                         expression {stageMap["NpmBuild"] }
-                        changeset 'src\**'
+                        changeset 'src/**'
                     }                
                 }
                 steps {
