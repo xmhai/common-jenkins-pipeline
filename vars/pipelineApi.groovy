@@ -193,6 +193,8 @@ def call(Map configMap) {
                 steps {
                     script {
                         echo "Deploy to Kubernetes..."
+                        sh "kubectl delete -f k8s-deploy.yaml"
+                        sh "kubectl apply -f k8s-deploy.yaml"
                     }
                 }
             }
