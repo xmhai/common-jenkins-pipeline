@@ -74,8 +74,11 @@ def call(Map configMap) {
             }
             stage("NpmBuild") {
                 when {
-                    expression {stageMap["NpmBuild"] }
-                }                
+                    allOf {
+                        expression {stageMap["NpmBuild"] }
+                        changeset 'src\**'
+                    }                
+                }
                 steps {
                     script {
                         echo "Npm Build..."
